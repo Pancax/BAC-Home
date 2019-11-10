@@ -223,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, ResultActivity.class);
         i.putExtra("result",result);
         i.putExtra("voucherURI", voucherFileLocation);
+        Log.d("message",i.getParcelableExtra("voucherURI").toString());
         startActivity(i);
     }
 
@@ -252,7 +253,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            //Log.d("ResultData",resultData.getData().toString());
             voucherFileLocation = resultData.getData();
+            //Log.d("ResultData2",voucherFileLocation.toString());
         }
     }
 }

@@ -33,7 +33,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uri = (Uri) getIntent().getSerializableExtra("voucherURI");
+        uri = (Uri) getIntent().getParcelableExtra("voucherURI");
         setContentView(R.layout.activity_result);
         resultBox = findViewById(R.id.result_text);
         multiPurposeButton = findViewById(R.id.result_button);
