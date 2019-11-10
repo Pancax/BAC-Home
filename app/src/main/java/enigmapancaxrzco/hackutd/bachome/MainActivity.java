@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private static final byte PERMISSIONS_FOR_SCAN = 100;
     Context mContext;
     BACtrackAPI APIObj;
-    ArrayList<String> vouchers;
     TextView tv;
     TextView blowField;
     TextView startingInField;
@@ -45,12 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void startButtonClicked(View v){
-        if(APIObj!=null&&(vouchers!=null)){
+        if(APIObj!=null&&(voucherFileLocation!=null)){
             //start off the actual process test activity stuff
             startTestActivity();
         }
         Log.d("Friend",APIObj.toString());
-        Log.d("Bob",vouchers.toString());
     }
     public void SettingsButtonClicked(View v){
         //Handle settings shit
