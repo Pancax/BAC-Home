@@ -38,15 +38,12 @@ public class ResultActivity extends AppCompatActivity {
         resultBox = findViewById(R.id.result_text);
         multiPurposeButton = findViewById(R.id.result_button);
         phone = findViewById(R.id.phone_box);
-        float bac = getIntent().getFloatExtra("result",0);
+        float bac = getIntent().getFloatExtra("result",1);
         StringBuilder sb = new StringBuilder();
         sb.append("Your BAC is " + bac);
-        if (uri == null) {
-            setResultBox("URI is null!");
-        }
         if (bac >= -.01) {
             sb.append(" and you are too drunk to drive.  Click below to get a free Uber ride sent to you!");
-           // setResultBox(sb.toString());
+            setResultBox(sb.toString());
             isOverLimit = true;
         } else {
             //User is not over the legal limit
