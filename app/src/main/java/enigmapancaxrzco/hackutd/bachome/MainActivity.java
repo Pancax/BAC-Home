@@ -211,9 +211,8 @@ public class MainActivity extends AppCompatActivity {
     public void goToResultActivity(float result){
         Intent i = new Intent(this, ResultActivity.class);
         i.putExtra("result",result);
-
+        startActivity(i);
     }
-    //Call result activity
 
     //implement file Selector
     private void setStatus(final String message) {
