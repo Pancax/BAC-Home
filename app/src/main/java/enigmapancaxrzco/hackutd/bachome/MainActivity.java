@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void SettingsButtonClicked(View v){
-        //Handle settings shit
         setContentView(R.layout.activity_settings);
     }
     BACtrackAPICallbacks BACCallbacks = new
