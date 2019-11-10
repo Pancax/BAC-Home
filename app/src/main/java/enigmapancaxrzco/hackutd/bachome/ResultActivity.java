@@ -25,6 +25,7 @@ import java.util.Objects;
 public class ResultActivity extends AppCompatActivity {
 
     private TextView resultBox;
+    private TextView caseBox;
     private Button multiPurposeButton;
     private boolean isOverLimit;
     private TextView phone;
@@ -37,18 +38,17 @@ public class ResultActivity extends AppCompatActivity {
         uri = (Uri) getIntent().getParcelableExtra("voucherURI");
         setContentView(R.layout.activity_result);
         resultBox = findViewById(R.id.result_text);
+        caseBox = findViewById(R.id.result_text_filler2);
         multiPurposeButton = findViewById(R.id.result_button);
         phone = findViewById(R.id.phone_box);
         float bac = getIntent().getFloatExtra("result",1);
-        StringBuilder sb = new StringBuilder();
-        sb.append("Your BAC is " + bac);
         if (bac >= -.01) {
-            sb.append(" and you are too drunk to drive.  Click below to get a free Lyft ride sent to you!");
-            setResultBox(sb.toString());
+            setResultBox(bac+"");
+            caseBox.setText("You are too drunk to drive.  Click below to get a free Lyft ride sent to you!");
             isOverLimit = true;
         } else {
             //User is not over the legal limit
-            sb.append(".  You should not rely on this as an indication of whether you should drive.  Click below to continue");
+            caseBox.setText("You should not rely on this as an indication of whether you should drive.  Click below to continue");
             isOverLimit = false;
         }
     }

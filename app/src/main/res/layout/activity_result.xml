@@ -8,11 +8,11 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,17 +25,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/result_text"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="155dp"
-                android:layout_marginEnd="155dp"
-                android:text="@string/result_text"
-                android:textSize="36sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/result_text_filler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/result_text_filler"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/result_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/result_text"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/result_text_filler"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/result_text_filler"
+                    app:layout_constraintTop_toTopOf="@+id/result_text_filler" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/result_text_filler2"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/result_text_filler2"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
             <EditText
                 android:id="@+id/phone_box"
@@ -47,10 +81,9 @@
                 android:hint="@string/phone_number"
                 android:inputType="textPersonName|phone"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/result_text" />
+                app:layout_constraintTop_toBottomOf="@+id/result_text_filler2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
