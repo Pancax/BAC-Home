@@ -41,11 +41,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (APIObj != null && voucherFileLocation != null) {
-            setupCompleted = true;
-            findViewById(R.id.setup_button).setVisibility(View.INVISIBLE);
-            findViewById(R.id.not_connected_info).setVisibility(View.INVISIBLE);
-        }
         setContentView(R.layout.activity_main);
         mContext= this;
 
@@ -189,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void finishButtonClicked(View v){
         setContentView(R.layout.activity_main);
+        if (APIObj != null && voucherFileLocation != null) {
+            setupCompleted = true;
+            findViewById(R.id.setup_button).setVisibility(View.INVISIBLE);
+            findViewById(R.id.not_connected_info).setVisibility(View.INVISIBLE);
+        }
     }
     //implement the document stuff
 

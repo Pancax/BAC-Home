@@ -15,4 +15,6 @@
     <string name="hand_click_desc">Hand Clicking Image</string>
     <string name="phone_number">Phone Number (Digits)</string>
     <string name="GoodConnect">Successfully Connected</string>
+    <string name="SettingsFinishButton">Finish</string>
+    <string name="SendSMSButton">Send voucher</string>
 </resources>
