@@ -2,6 +2,7 @@ package enigmapancaxrzco.hackutd.bachome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -104,8 +105,8 @@ public class ResultActivity extends AppCompatActivity {
             } catch (IOException e) {
                 resultBox.setText(e.getMessage());
             }
-        } else {
-            //TODO: RETURN TO MAINACTIVITY
         }
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }

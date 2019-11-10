@@ -256,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, ResultActivity.class);
         i.putExtra("result",result);
         i.putExtra("voucherURI", voucherFileLocation);
-        Log.d("message",i.getParcelableExtra("voucherURI").toString());
         startActivity(i);
     }
 
