@@ -23,10 +23,10 @@ public class ResultActivity extends AppCompatActivity {
         resultBox = findViewById(R.id.result_text);
         multiPurposeButton = findViewById(R.id.result_button);
         phone = findViewById(R.id.phone_box);
-        float bac =  0;//TODO: GET THIS FROM SAVEDINSTANCESTATE
+        float bac = getIntent().getFloatExtra("result",0);
         StringBuilder sb = new StringBuilder();
         sb.append("Your BAC is " + bac);
-        if (bac >= .08) {
+        if (bac >= -.01) {
             sb.append(" and you are too drunk to drive.  Click below to get a free Uber ride sent to you!");
             setResultBox(sb.toString());
             isOverLimit = true;
