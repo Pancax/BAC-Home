@@ -43,7 +43,7 @@ public class ResultActivity extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
         sb.append("Your BAC is " + bac);
         if (bac >= -.01) {
-            sb.append(" and you are too drunk to drive.  Click below to get a free Uber ride sent to you!");
+            sb.append(" and you are too drunk to drive.  Click below to get a free Lyft ride sent to you!");
             setResultBox(sb.toString());
             isOverLimit = true;
         } else {
@@ -99,7 +99,7 @@ public class ResultActivity extends AppCompatActivity {
                 os.close();
                 //Our phone number is validated at this point and we can use it to craft the API call
                 CallAPI caller = new CallAPI();
-                String data = "To=+1" + phoneNumber + "&From=+14109883764&Body=Here%20is%20your%20free%20Uber%20voucher!%20%20Thank%20you%20for%20driving%20safely:%20" + voucher;
+                String data = "To=+1" + phoneNumber + "&From=+14109883764&Body=Here%20is%20your%20free%20Lyft%20ride!%20%20Thank%20you%20for%20driving%20safely:%20" + voucher;
                 caller.execute(urlToCall, data);
             } catch (IOException e) {
                 resultBox.setText(e.getMessage());
