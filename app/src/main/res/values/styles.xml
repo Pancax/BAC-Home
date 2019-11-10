@@ -9,8 +9,11 @@
     </style>
     <style name="ButtonTheme" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:textSize">20sp</item>
-        <item name="android:background">@drawable/button_shape</item>
+        <item name="android:background">@drawable/button_background_selector</item>
         <item name="android:textColor">#7E7E7E</item>
+    </style>
+    <style name="BigButtonTheme" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/big_button_bg_selector</item>
     </style>
 
 </resources>
