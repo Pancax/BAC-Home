@@ -1,6 +1,7 @@
 package enigmapancaxrzco.hackutd.bachome;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -37,13 +38,16 @@ public class CallAPI extends AsyncTask<String, Void, Void> {
             urlConnection.setDoOutput(true);
 
             urlConnection.connect();
-
-            out = new BufferedOutputStream(urlConnection.getOutputStream());
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-            writer.write(data);
-            writer.flush();
-            writer.close();
-            out.close();
+            int responseCode = urlConnection.getResponseCode();
+            Log.d("URLResponse", responseCode+"");
+            if(responseCode == HttpsURLConnection.HTTP_OK) {
+                out = new BufferedOutputStream(urlConnection.getOutputStream());
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+                writer.write(data);
+                writer.flush();
+                writer.close();
+                out.close();
+            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
