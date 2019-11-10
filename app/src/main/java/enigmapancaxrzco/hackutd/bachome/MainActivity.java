@@ -194,20 +194,18 @@ public class MainActivity extends AppCompatActivity {
          getReadyField = findViewById(R.id.countdown_text_getready);
          countdownLayout = findViewById(R.id.countdown_container);
          blowField.setVisibility(View.INVISIBLE);
+         APIObj.startCountdown();
 
     }
     public void updateCountDown(int secondsLeft){
-        setTextViewUI(secondsLeftPrompt,secondsLeft+"");
+        secondsLeftPrompt.setText(secondsLeft+"");
     }
     public void sayBlowNow(){
         countdownLayout.setVisibility(View.INVISIBLE);
-        setTextViewUI(blowField, "Start Blowing");
     }
     public void sayKeepBlowing(){
-       setTextViewUI(blowField,"Keep Blowing");
     }
     public void sayStopBlowing(){
-        setTextViewUI(blowField, "Stop Blowing");
     }
     public void goToResultActivity(float result){
         Intent i = new Intent(this, ResultActivity.class);
@@ -225,14 +223,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void setTextViewUI(final TextView tv, final String message){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tv.setText(message);
-            }
-        });
-    }
+
     public void selectFileButtonClicked(View v) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("*/*");
