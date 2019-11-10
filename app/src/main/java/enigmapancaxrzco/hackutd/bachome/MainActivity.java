@@ -38,22 +38,32 @@ public class MainActivity extends AppCompatActivity {
     private Uri voucherFileLocation;
     boolean setupCompleted = false;
     private final String APIKEY = "cd2eda75f4dd42948f621ce1d02e3c";
+    boolean canClickButtons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext= this;
+        canClickButtons=true;
 
     }
     public void startButtonClicked(View v){
-        if(APIObj!=null&&(voucherFileLocation!=null)){
-            //start off the actual process test activity stuff
-            startTestActivity();
+        if(canClickButtons) {
+            canClickButtons = false;
+            if (APIObj != null && (voucherFileLocation != null)) {
+                //start off the actual process test activity stuff
+                startTestActivity();
+            }
+            canClickButtons =true;
         }
     }
-    public void SettingsButtonClicked(View v){
-        if (!setupCompleted) {
-            setContentView(R.layout.activity_settings);
+    public void SettingsButtonClicked(View v) {
+        if (canClickButtons) {
+            canClickButtons = false;
+            if (!setupCompleted) {
+                setContentView(R.layout.activity_settings);
+                canClickButtons=true;
+            }
         }
     }
     BACtrackAPICallbacks BACCallbacks = new
@@ -70,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void BACtrackConnected(BACTrackDeviceType bacTrackDeviceType) {
+            canClickButtons=true;
             setStatus("Successfully Connected");
         }
 
@@ -81,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void BACtrackDisconnected() {
             setStatus("Successfully Disconnected");
+            canClickButtons=true;
         }
 
         @Override
@@ -156,44 +168,56 @@ public class MainActivity extends AppCompatActivity {
 
     //Fill out the settings Activity stuff
     public void connectButtonClicked(View v){
-        tv = findViewById(R.id.debug_box);
-        try {
-            APIObj = new BACtrackAPI(this, BACCallbacks, APIKEY);
-            mContext = this;
-        }catch(Exception e){
-            tv.setText(e.getMessage());
-        }
-        if(!APIObj.isConnected()){
-            if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_FOR_SCAN);
+        if(canClickButtons) {
+            canClickButtons = false;
+            tv = findViewById(R.id.debug_box);
+            try {
+                APIObj = new BACtrackAPI(this, BACCallbacks, APIKEY);
+                mContext = this;
+            } catch (Exception e) {
+                tv.setText(e.getMessage());
             }
-            APIObj.connectToNearestBreathalyzer();
-        } else{
-            tv.setText("Already Connected");
+            if (!APIObj.isConnected()) {
+                if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_FOR_SCAN);
+                }
+                APIObj.connectToNearestBreathalyzer();
+            } else {
+                tv.setText("Already Connected");
+            }
         }
     }
     public void disconnectButtonClicked(View v){
-        if(APIObj ==null){
-           tv.setText("Not Connected");
-            return;
+        if(canClickButtons) {
+            canClickButtons=false;
+            if (APIObj == null) {
+                tv.setText("Not Connected");
+                canClickButtons=true;
+                return;
+            }
+            APIObj.disconnect();
         }
-        APIObj.disconnect();
     }
     public void finishButtonClicked(View v){
-        setContentView(R.layout.activity_main);
-        if (APIObj != null && voucherFileLocation != null) {
-            setupCompleted = true;
-            findViewById(R.id.setup_button).setVisibility(View.INVISIBLE);
-            findViewById(R.id.not_connected_info).setVisibility(View.INVISIBLE);
+
+        if(canClickButtons) {
+            setContentView(R.layout.activity_main);
+            canClickButtons = true;
+            if (APIObj != null && voucherFileLocation != null) {
+                setupCompleted = true;
+                findViewById(R.id.setup_button).setVisibility(View.INVISIBLE);
+                findViewById(R.id.not_connected_info).setVisibility(View.INVISIBLE);
+            }
         }
     }
     //implement the document stuff
 
     //Fill out the Test Activity Stuff
     public void startTestActivity(){
+        canClickButtons=true;
         setContentView(R.layout.activity_test);
          blowField = findViewById(R.id.blow_text);
          startingInField = findViewById(R.id.countdown_text_starting);

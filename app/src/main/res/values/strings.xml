@@ -17,4 +17,5 @@
     <string name="GoodConnect">Successfully Connected</string>
     <string name="SettingsFinishButton">Finish</string>
     <string name="SendSMSButton">Send voucher</string>
+    <string name="WaitingText">Waiting…</string>
 </resources>
