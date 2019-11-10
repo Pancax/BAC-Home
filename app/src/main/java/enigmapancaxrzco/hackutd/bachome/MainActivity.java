@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             //start off the actual process test activity stuff
             startTestActivity();
         }
-        Log.d("Friend",APIObj.toString());
     }
     public void SettingsButtonClicked(View v){
         //Handle settings shit
@@ -202,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void sayBlowNow(){
         countdownLayout.setVisibility(View.INVISIBLE);
+        blowField.setVisibility(View.VISIBLE);
     }
     public void sayKeepBlowing(){
     }
