@@ -30,7 +30,6 @@
             android:id="@+id/countdown_text_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/countdown_text_timer"
             android:textSize="64sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
