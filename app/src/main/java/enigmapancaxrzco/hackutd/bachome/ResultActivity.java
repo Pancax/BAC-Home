@@ -88,7 +88,7 @@ public class ResultActivity extends AppCompatActivity {
                 }
                 //Our phone number is validated at this point and we can use it to craft the API call
                 CallAPI caller = new CallAPI();
-                String data = "To=+1" + phoneNumber + "&From=+14109883764&Body=Here is your free Uber voucher!  Thank you for driving safely: " + voucher;
+                String data = "To=+1" + phoneNumber + "&From=+14109883764&Body=Here%20is%20your%20free%20Uber%20voucher!%20%20Thank%20you%20for%20driving%20safely:%20" + voucher;
                 caller.execute(urlToCall, data);
             } catch (IOException e) {
                 resultBox.setText(e.getMessage());
