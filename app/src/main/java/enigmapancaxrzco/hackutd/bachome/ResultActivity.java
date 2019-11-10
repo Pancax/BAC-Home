@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -64,13 +65,19 @@ public class ResultActivity extends AppCompatActivity {
             String voucher;
             try {
                 InputStream is = getContentResolver().openInputStream(uri);
+                Log.d("InputStream is ", is.toString());
                 BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
+                Log.d("BufferedReader is ", br.toString());
                 StringBuilder fileContentSB = new StringBuilder();
-                String line;
-                while ((line = br.readLine()) != null) {
+                String line = br.readLine();
+                Log.d("line is",line);
+                while (line != null) {
                     fileContentSB.append(line);
+                    line = br.readLine();
                 }
+                Log.d("fileContentSB is ",fileContentSB.toString());
                 String[] voucherAr = fileContentSB.toString().split(",");
+                Log.d("voucherAr[0] is ",voucherAr[0]);
                 StringBuilder newContents = new StringBuilder();
                 voucher = voucherAr[0];
                 for (int i = 1; i < voucherAr.length; i++) {
@@ -86,6 +93,10 @@ public class ResultActivity extends AppCompatActivity {
                         return;
                     }
                 }
+                br.close();
+                bw.close();
+                is.close();
+                os.close();
                 //Our phone number is validated at this point and we can use it to craft the API call
                 CallAPI caller = new CallAPI();
                 String data = "To=+1" + phoneNumber + "&From=+14109883764&Body=Here%20is%20your%20free%20Uber%20voucher!%20%20Thank%20you%20for%20driving%20safely:%20" + voucher;
