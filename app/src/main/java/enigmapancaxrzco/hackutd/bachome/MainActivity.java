@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -53,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
         //Handle settings shit
         setContentView(R.layout.activity_settings);
     }
-    BACtrackAPICallbacks BACCallbacks = new BACtrackAPICallbacks() {
+    BACtrackAPICallbacks BACCallbacks = new
+            BACtrackAPICallbacks() {
         @Override
         public void BACtrackAPIKeyDeclined(String s) {
 
@@ -66,17 +68,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void BACtrackConnected(BACTrackDeviceType bacTrackDeviceType) {
-
+            setStatus("Successfully Connected");
         }
 
         @Override
         public void BACtrackDidConnect(String s) {
-
+            setStatus("Successfully Found Device, Connecting.");
         }
 
         @Override
         public void BACtrackDisconnected() {
-
+            setStatus("Successfully Disconnected");
         }
 
         @Override
@@ -91,27 +93,27 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void BACtrackCountdown(int i) {
-
+            updateCountDown(i);
         }
 
         @Override
         public void BACtrackStart() {
-
+            sayBlowNow();
         }
 
         @Override
         public void BACtrackBlow() {
-
+            sayKeepBlowing();
         }
 
         @Override
         public void BACtrackAnalyzing() {
-
+            sayStopBlowing();
         }
 
         @Override
         public void BACtrackResults(float v) {
-
+            goToResultActivity(v);
         }
 
         @Override
@@ -160,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
             tv.setText(e.getMessage());
         }
         if(!APIObj.isConnected()){
-            //update text
             if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this,
@@ -169,16 +170,15 @@ public class MainActivity extends AppCompatActivity {
             }
             APIObj.connectToNearestBreathalyzer();
         } else{
-            //it is already connected
+            tv.setText("Already Connected");
         }
     }
     public void disconnectButtonClicked(View v){
         if(APIObj ==null){
-            //it was not connected
+           tv.setText("Not Connected");
             return;
         }
         APIObj.disconnect();
-        //update the text
     }
     public void finishButtonClicked(View v){
         setContentView(R.layout.activity_main);
@@ -216,4 +216,12 @@ public class MainActivity extends AppCompatActivity {
     //Call result activity
 
     //implement file Selector
+    private void setStatus(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tv.setText(String.format("%s", message));
+            }
+        });
+    }
 }
