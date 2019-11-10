@@ -197,16 +197,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void updateCountDown(int secondsLeft){
-        //update text stuff
+        setTextViewUI(secondsLeftPrompt,secondsLeft+"");
     }
     public void sayBlowNow(){
         countdownLayout.setVisibility(View.INVISIBLE);
+        setTextViewUI(blowField, "Start Blowing");
     }
     public void sayKeepBlowing(){
-        //say KeepBlowing
+       setTextViewUI(blowField,"Keep Blowing");
     }
     public void sayStopBlowing(){
-        //say to stop blowing
+        setTextViewUI(blowField, "Stop Blowing");
     }
     public void goToResultActivity(float result){
         Intent i = new Intent(this, ResultActivity.class);
@@ -221,6 +222,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 tv.setText(String.format("%s", message));
+            }
+        });
+    }
+    private void setTextViewUI(final TextView tv, final String message){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tv.setText(message);
             }
         });
     }
