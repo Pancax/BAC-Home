@@ -36,17 +36,18 @@ public class CallAPI extends AsyncTask<String, Void, Void> {
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoInput(true);
             urlConnection.setDoOutput(true);
-
+            out = new BufferedOutputStream(urlConnection.getOutputStream());
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+            writer.write(data);
+            writer.flush();
+            writer.close();
+            out.close();
             urlConnection.connect();
+
             int responseCode = urlConnection.getResponseCode();
             Log.d("URLResponse", responseCode+"");
             if(responseCode == HttpsURLConnection.HTTP_OK) {
-                out = new BufferedOutputStream(urlConnection.getOutputStream());
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-                writer.write(data);
-                writer.flush();
-                writer.close();
-                out.close();
+
             }
 
         } catch (Exception e) {
