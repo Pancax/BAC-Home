@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
         if(canClickButtons) {
             canClickButtons = false;
             tv = findViewById(R.id.debug_box);
+            tv.setText("Searching For Devices");
             try {
                 APIObj = new BACtrackAPI(this, BACCallbacks, APIKEY);
                 mContext = this;
