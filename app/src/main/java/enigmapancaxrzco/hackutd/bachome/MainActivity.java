@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,10 +36,16 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout countdownLayout;
     private static final int READ_REQUEST_CODE = 42;
     private Uri voucherFileLocation;
+    boolean setupCompleted = false;
     private final String APIKEY = "cd2eda75f4dd42948f621ce1d02e3c";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (APIObj != null && voucherFileLocation != null) {
+            setupCompleted = true;
+            findViewById(R.id.setup_button).setVisibility(View.INVISIBLE);
+            findViewById(R.id.not_connected_info).setVisibility(View.INVISIBLE);
+        }
         setContentView(R.layout.activity_main);
         mContext= this;
 
@@ -50,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void SettingsButtonClicked(View v){
-        setContentView(R.layout.activity_settings);
+        if (!setupCompleted) {
+            setContentView(R.layout.activity_settings);
+        }
     }
     BACtrackAPICallbacks BACCallbacks = new
             BACtrackAPICallbacks() {
