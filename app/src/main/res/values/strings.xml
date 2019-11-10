@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MainActivity</string>
+    <string name="not_connected">You are not connected.\nPlease Connect!</string>
+    <string name="connect_breath">Connect to breathalyzer</string>
+    <string name="file_browse">Select Voucher CSV file</string>
+    <string name="disconnect_breath">Disconnect from breathalyzer</string>
+    <string name="tap_screen_to_start">TAP SCREEN\nTO START\n\n\n</string>
+    <string name="tap_screen_to_start2">TAP SCREEN\nTO START\n\n</string>
+    <string name="settings">SETTINGS</string>
+    <string name="countdown_text_starting">Starting in</string>
+    <string name="countdown_text_timer">99</string>
+    <string name="countdown_text_getready">Get ready</string>
+    <string name="blow_text">BLOW INTO DEVICE</string>
+    <string name="result_text">Result</string>
+    <string name="hand_click_desc">Hand Clicking Image</string>
+</resources>
