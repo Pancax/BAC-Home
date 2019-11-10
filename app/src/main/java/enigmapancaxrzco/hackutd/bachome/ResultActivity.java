@@ -2,11 +2,24 @@ package enigmapancaxrzco.hackutd.bachome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -46,17 +59,39 @@ public class ResultActivity extends AppCompatActivity {
 
     public void onButtonPress(View v) {
         if (isOverLimit) {
-            String phoneNumber = phone.getText().toString();
-            for (int i = 0; i < phoneNumber.length(); i++) {
-                if (!Character.isDigit(phoneNumber.charAt(i))) {
-                    setResultBox("That phone number is invalid.  Enter 10 digits only!");
-                    return;
+            Uri uri = (Uri) getIntent().getSerializableExtra("voucherURI");
+            String voucher;
+            try {
+                InputStream is = getContentResolver().openInputStream(uri);
+                BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
+                StringBuilder fileContentSB = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    fileContentSB.append(line);
                 }
+                String[] voucherAr = fileContentSB.toString().split(",");
+                StringBuilder newContents = new StringBuilder();
+                voucher = voucherAr[0];
+                for (int i = 1; i < voucherAr.length; i++) {
+                    newContents.append(voucherAr[i] + ",");
+                }
+                OutputStream os = getContentResolver().openOutputStream(uri);
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
+                bw.write(newContents.toString());
+                String phoneNumber = phone.getText().toString();
+                for (int i = 0; i < phoneNumber.length(); i++) {
+                    if (!Character.isDigit(phoneNumber.charAt(i))) {
+                        setResultBox("That phone number is invalid.  Enter 10 digits only!");
+                        return;
+                    }
+                }
+                //Our phone number is validated at this point and we can use it to craft the API call
+                CallAPI caller = new CallAPI();
+                String data = "To=" + phoneNumber + "&From=+14109883764&Body=Here is your free Uber voucher!  Thank you for driving safely: " + voucher;
+                caller.execute(urlToCall, data);
+            } catch (IOException e) {
+                resultBox.setText(e.getMessage());
             }
-            //Our phone number is validated at this point and we can use it to craft the API call
-            CallAPI caller = new CallAPI();
-            String data = "To=" + phoneNumber + "&From=+14109883764&Body=Here is your free Uber voucher!  Thank you for driving safely: " + "INSERTVOUCHERHERE";
-            caller.execute(urlToCall, data);
         } else {
             //TODO: RETURN TO MAINACTIVITY
         }
