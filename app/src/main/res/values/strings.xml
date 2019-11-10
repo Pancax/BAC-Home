@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MainActivity</string>
+    <string name="app_name">BAC-Home</string>
     <string name="not_connected">You are not connected.\nPlease Connect!</string>
     <string name="connect_breath">Connect to breathalyzer</string>
     <string name="file_browse">Select Voucher CSV file</string>
