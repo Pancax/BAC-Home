@@ -27,11 +27,16 @@ public class ResultActivity extends AppCompatActivity {
     private Button multiPurposeButton;
     private boolean isOverLimit;
     private TextView phone;
+    private Uri uri;
     private final String urlToCall = "https://api.twilio.com/2010-04-01/Accounts/AC2d5168c70cee421759a0f48328fb4dd5/Messages.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        uri = (Uri) getIntent().getSerializableExtra("voucherURI");
+        if (uri == null) {
+            setResultBox("URI is null!");
+        }
         setContentView(R.layout.activity_result);
         resultBox = findViewById(R.id.result_text);
         multiPurposeButton = findViewById(R.id.result_button);
@@ -59,7 +64,6 @@ public class ResultActivity extends AppCompatActivity {
 
     public void onButtonPress(View v) {
         if (isOverLimit) {
-            Uri uri = (Uri) getIntent().getSerializableExtra("voucherURI");
             String voucher;
             try {
                 InputStream is = getContentResolver().openInputStream(uri);
