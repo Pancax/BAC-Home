@@ -16,21 +16,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
 
 import BACtrackAPI.API.BACtrackAPI;
 import BACtrackAPI.API.BACtrackAPICallbacks;
 import BACtrackAPI.Constants.BACTrackDeviceType;
 import BACtrackAPI.Constants.BACtrackUnit;
-import BACtrackAPI.Exceptions.BluetoothLENotSupportedException;
-import BACtrackAPI.Exceptions.BluetoothNotEnabledException;
-import BACtrackAPI.Exceptions.LocationServicesNotEnabledException;
 
 public class MainActivity extends AppCompatActivity {
     private static final byte PERMISSIONS_FOR_SCAN = 100;
@@ -54,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void startButtonClicked(View v){
-        if(!(APIObj==null)&&!(vouchers==null)){
+        if(APIObj!=null&&(vouchers!=null)){
             //start off the actual process test activity stuff
             startTestActivity();
         }
-
+        Log.d("Friend",APIObj.toString());
+        Log.d("Bob",vouchers.toString());
     }
     public void SettingsButtonClicked(View v){
         //Handle settings shit
