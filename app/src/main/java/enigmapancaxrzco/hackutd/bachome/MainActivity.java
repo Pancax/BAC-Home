@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -192,7 +193,24 @@ public class MainActivity extends AppCompatActivity {
          secondsLeftPrompt = findViewById(R.id.countdown_text_timer);
          getReadyField = findViewById(R.id.countdown_text_getready);
          countdownLayout = findViewById(R.id.countdown_container);
-        blowField.setVisibility(View.INVISIBLE);
+         blowField.setVisibility(View.INVISIBLE);
+
+    }
+    public void updateCountDown(int secondsLeft){
+        //update text stuff
+    }
+    public void sayBlowNow(){
+        countdownLayout.setVisibility(View.INVISIBLE);
+    }
+    public void sayKeepBlowing(){
+        //say KeepBlowing
+    }
+    public void sayStopBlowing(){
+        //say to stop blowing
+    }
+    public void goToResultActivity(float result){
+        Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("result",result);
 
     }
     //Call result activity
