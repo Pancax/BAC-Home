@@ -197,15 +197,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void updateCountDown(int secondsLeft){
-        secondsLeftPrompt.setText(secondsLeft+"");
+        setUpdateCount(secondsLeft+"");
     }
     public void sayBlowNow(){
         countdownLayout.setVisibility(View.INVISIBLE);
         blowField.setVisibility(View.VISIBLE);
     }
     public void sayKeepBlowing(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                blowField.setText(String.format("%s", "Keep Blowing"));
+            }
+        });
     }
     public void sayStopBlowing(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                blowField.setText(String.format("%s", "Stop Blowing."));
+            }
+        });
     }
     public void goToResultActivity(float result){
         Intent i = new Intent(this, ResultActivity.class);
@@ -223,7 +235,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void setUpdateCount(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                secondsLeftPrompt.setText(String.format("%s", message));
+            }
+        });
+    }
     public void selectFileButtonClicked(View v) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("*/*");

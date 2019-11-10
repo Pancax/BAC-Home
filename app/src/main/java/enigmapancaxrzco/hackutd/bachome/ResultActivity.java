@@ -46,7 +46,7 @@ public class ResultActivity extends AppCompatActivity {
         }
         if (bac >= -.01) {
             sb.append(" and you are too drunk to drive.  Click below to get a free Uber ride sent to you!");
-            setResultBox(sb.toString());
+           // setResultBox(sb.toString());
             isOverLimit = true;
         } else {
             //User is not over the legal limit
