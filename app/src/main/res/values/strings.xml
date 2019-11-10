@@ -13,4 +13,5 @@
     <string name="blow_text">BLOW INTO DEVICE</string>
     <string name="result_text">Result</string>
     <string name="hand_click_desc">Hand Clicking Image</string>
+    <string name="phone_number">Phone Number (Digits)</string>
 </resources>
